@@ -5,9 +5,9 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import static android.provider.BaseColumns._ID;
-import static com.example.joannahulek.babylangu.data.KidContract.KidEntry.COLUMN_BG_COLOUR;
+import static com.example.joannahulek.babylangu.data.KidContract.KidEntry.COLUMN_BG_COLOR;
 import static com.example.joannahulek.babylangu.data.KidContract.KidEntry.COLUMN_BIRTH;
-import static com.example.joannahulek.babylangu.data.KidContract.KidEntry.COLUMN_IMAGE_URI;
+import static com.example.joannahulek.babylangu.data.KidContract.KidEntry.COLUMN_IMG_URI;
 import static com.example.joannahulek.babylangu.data.KidContract.KidEntry.COLUMN_NAME;
 import static com.example.joannahulek.babylangu.data.KidContract.KidEntry.TABLE_NAME;
 
@@ -21,8 +21,8 @@ class KidDdHelper extends SQLiteOpenHelper {
             + _ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
             + COLUMN_NAME + " TEXT NOT NULL, "
             + COLUMN_BIRTH + " DATE NOT NULL, "
-            + COLUMN_IMAGE_URI + " TEXT NOT NULL, "
-            + COLUMN_BG_COLOUR + "TEXT NOT NULL);";
+            + COLUMN_IMG_URI + " TEXT NOT NULL, "
+            + COLUMN_BG_COLOR + "TEXT NOT NULL);";
     private static final String DATABASE_NAME = "kidslist.dp";
     private static final int DATABASE_VERSION = 1;
 

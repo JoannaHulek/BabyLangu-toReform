@@ -2,4 +2,7 @@
     <string name="app_name">BabyLangu</string>
     <string name="settings">Settings</string>
     <string name="remove">Remove</string>
+    <string name="empty_list">Empty list</string>
+    <string name="any_dictionaries">You don\'t have\nany dictionaries.</string>
+    <string name="item_image">Item image</string>
 </resources>

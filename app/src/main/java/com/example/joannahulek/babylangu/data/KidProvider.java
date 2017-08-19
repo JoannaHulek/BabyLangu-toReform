@@ -10,8 +10,12 @@ import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
+import org.joda.time.LocalDate;
+
+
 import static android.R.attr.id;
 import static com.example.joannahulek.babylangu.data.KidContract.CONTENT_AUTHORITY;
+import static com.example.joannahulek.babylangu.data.KidContract.KidEntry.*;
 import static com.example.joannahulek.babylangu.data.KidContract.PATH_KIDS;
 
 /**
@@ -47,14 +51,12 @@ public class KidProvider extends ContentProvider {
         int match = sUriMatcher.match(uri);
         switch (match) {
             case KIDS:
-                cursor = database.query(KidContract.KidEntry.TABLE_NAME, projection, selection,
-                        selectionArgs, null, null, sortOrder);
+                cursor = database.query(TABLE_NAME, projection, selection, selectionArgs, null, null, sortOrder);
                 break;
             case KID_ID:
-                selection = KidContract.KidEntry._ID + "=?";
+                selection = _ID + "=?";
                 selectionArgs = new String[]{String.valueOf(ContentUris.parseId(uri))};
-                cursor = database.query(KidContract.KidEntry.TABLE_NAME, projection, selection,
-                        selectionArgs, null, null, sortOrder);
+                cursor = database.query(TABLE_NAME, projection, selection, selectionArgs, null, null, sortOrder);
                 break;
             default:
                 throw new IllegalArgumentException("Cannot query unknown URI " + uri);
@@ -70,9 +72,9 @@ public class KidProvider extends ContentProvider {
         final int match = sUriMatcher.match(uri);
         switch (match) {
             case KIDS:
-                return KidContract.KidEntry.CONTENT_LIST_TYPE;
+                return CONTENT_LIST_TYPE;
             case KID_ID:
-                return KidContract.KidEntry.CONTENT_ITEM_TYPE;
+                return CONTENT_ITEM_TYPE;
             default:
                 throw new IllegalArgumentException("Unknown URI " + uri + " with match " + match);
         }
@@ -91,19 +93,19 @@ public class KidProvider extends ContentProvider {
     }
 
     private Uri insertKid(Uri uri, ContentValues values) {
-        String name = values.getAsString(KidContract.KidEntry.COLUMN_NAME);
+        String name = values.getAsString(COLUMN_NAME);
         if (name == null) {
             throw new IllegalArgumentException("Illegal name");
         }
-        String birth = values.getAsString(KidContract.KidEntry.COLUMN_BIRTH);
+        String birth = values.getAsString(COLUMN_BIRTH);
         if (birth == null) {
             throw new IllegalArgumentException("Illegal birth date");
         }
-        String image_uri = values.getAsString(KidContract.KidEntry.COLUMN_IMAGE_URI);
+        String image_uri = values.getAsString(COLUMN_IMG_URI);
         if (image_uri == null) {
             throw new IllegalArgumentException("Illegal image uri");
         }
-        String bg_colour = values.getAsString(KidContract.KidEntry.COLUMN_BG_COLOUR);
+        String bg_colour = values.getAsString(COLUMN_BG_COLOR);
         if (bg_colour == null) {
             throw new IllegalArgumentException("Illegal background colour");
         }
@@ -117,12 +119,12 @@ public class KidProvider extends ContentProvider {
         final int match = sUriMatcher.match(uri);
         switch (match) {
             case KIDS:
-                rowsDeleted = database.delete(KidContract.KidEntry.TABLE_NAME, selection, selectionArgs);
+                rowsDeleted = database.delete(TABLE_NAME, selection, selectionArgs);
                 break;
             case KID_ID:
-                selection = KidContract.KidEntry._ID + "=?";
+                selection = _ID + "=?";
                 selectionArgs = new String[]{String.valueOf(ContentUris.parseId(uri))};
-                rowsDeleted = database.delete(KidContract.KidEntry.TABLE_NAME, selection, selectionArgs);
+                rowsDeleted = database.delete(TABLE_NAME, selection, selectionArgs);
                 break;
             default:
                 throw new IllegalArgumentException("Deletion is not supported for " + uri);
@@ -141,7 +143,7 @@ public class KidProvider extends ContentProvider {
             case KIDS:
                 return updateKid(uri, values, selection, selectionArgs);
             case KID_ID:
-                selection = KidContract.KidEntry._ID + "?";
+                selection = _ID + "?";
                 selectionArgs = new String[]{String.valueOf(ContentUris.parseId(uri))};
                 return updateKid(uri, values, selection, selectionArgs);
             default:
@@ -150,26 +152,26 @@ public class KidProvider extends ContentProvider {
     }
 
     private int updateKid(Uri uri, ContentValues values, String selection, String[] selectionArgs) {
-        if (values.containsKey(KidContract.KidEntry.COLUMN_NAME)) {
-            String name = values.getAsString(KidContract.KidEntry.COLUMN_NAME);
+        if (values.containsKey(COLUMN_NAME)) {
+            String name = values.getAsString(COLUMN_NAME);
             if (name == null) {
                 throw new IllegalArgumentException("Illegal kid name");
             }
         }
-        if (values.containsKey(KidContract.KidEntry.COLUMN_BIRTH)) {
-            String birth = values.getAsString(KidContract.KidEntry.COLUMN_BIRTH);
+        if (values.containsKey(COLUMN_BIRTH)) {
+            LocalDate birth = LocalDate.parse(values.getAsString(COLUMN_BIRTH));
             if (birth == null) {
                 throw new IllegalArgumentException("Illegal date of birth");
             }
         }
-        if (values.containsKey(KidContract.KidEntry.COLUMN_IMAGE_URI)) {
-            String image_uri = values.getAsString(KidContract.KidEntry.COLUMN_IMAGE_URI);
+        if (values.containsKey(COLUMN_IMG_URI)) {
+            String image_uri = values.getAsString(COLUMN_IMG_URI);
             if (image_uri == null) {
                 throw new IllegalArgumentException("Illegal image uri");
             }
         }
-        if (values.containsKey(KidContract.KidEntry.COLUMN_BG_COLOUR)) {
-            String bg_colour = values.getAsString(KidContract.KidEntry.COLUMN_BG_COLOUR);
+        if (values.containsKey(COLUMN_BG_COLOR)) {
+            String bg_colour = values.getAsString(COLUMN_BG_COLOR);
             if (bg_colour == null) {
                 throw new IllegalArgumentException("Illegal background colour");
             }
@@ -179,7 +181,7 @@ public class KidProvider extends ContentProvider {
             return 0;
         }
         SQLiteDatabase database = mDbHelper.getWritableDatabase();
-        int rowsUpdated = database.update(KidContract.KidEntry.TABLE_NAME, values, selection, selectionArgs);
+        int rowsUpdated = database.update(TABLE_NAME, values, selection, selectionArgs);
         if (rowsUpdated != 0) {
             getContext().getContentResolver().notifyChange(uri, null);
         }

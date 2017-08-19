@@ -9,7 +9,7 @@
         android:id="@+id/item_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:contentDescription=""
+        android:contentDescription="@string/item_image"
         tools:src="@drawable/book" />
 
     <RelativeLayout
@@ -33,7 +33,7 @@
                 tools:text="Main text" />
 
             <TextView
-                android:id="@+id/item_text_description"
+                android:id="@+id/item_description_text"
                 style="@style/DescriptionTextStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

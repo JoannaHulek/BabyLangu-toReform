@@ -28,7 +28,7 @@ public final class KidContract {
         public final static String TABLE_NAME = "kids";
         public final static String COLUMN_NAME = "name";
         public final static String COLUMN_BIRTH = "birth";
-        public final static String COLUMN_IMAGE_URI = "image_uri";
-        public final static String COLUMN_BG_COLOUR = "bg_colour";
+        public final static String COLUMN_IMG_URI = "img_uri";
+        public final static String COLUMN_BG_COLOR = "bg_color";
     }
 }
