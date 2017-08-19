@@ -5,4 +5,6 @@
     <string name="empty_list">Empty list</string>
     <string name="any_dictionaries">You don\'t have\nany dictionaries.</string>
     <string name="item_image">Item image</string>
+    <string name="baby_word">Baby word</string>
+    <string name="meaning">Meaning</string>
 </resources>
