@@ -39,11 +39,13 @@ public class KidCursorAdapter extends CursorAdapter implements Serializable{
 
     @Override
     public void bindView(View view, final Context context, final Cursor cursor) {
-        ImageView itemImage = (ImageView) view.findViewById(R.id.item_image);
         TextView itemMainText = (TextView) view.findViewById(R.id.item_main_text);
         TextView itemDescriptionText = (TextView) view.findViewById(R.id.item_description_text);
 
         final Kid kid = getKidFromCursor(cursor);
+
+        itemMainText.setText(kid.getName());
+        itemDescriptionText.setText(kid.getBirth().toString());
     }
 
     private Kid getKidFromCursor (final Cursor cursor){

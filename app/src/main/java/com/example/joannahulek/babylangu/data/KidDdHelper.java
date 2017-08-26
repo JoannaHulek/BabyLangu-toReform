@@ -22,9 +22,9 @@ class KidDdHelper extends SQLiteOpenHelper {
             + COLUMN_NAME + " TEXT NOT NULL, "
             + COLUMN_BIRTH + " DATE NOT NULL, "
             + COLUMN_IMG_URI + " TEXT NOT NULL, "
-            + COLUMN_BG_COLOR + "TEXT NOT NULL);";
+            + COLUMN_BG_COLOR + " TEXT NOT NULL);";
     private static final String DATABASE_NAME = "kidslist.dp";
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 3;
 
     public KidDdHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -37,6 +37,7 @@ class KidDdHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
+        db.execSQL("DROP TABLE "+TABLE_NAME);
+        db.execSQL(SQL_CREATE_KIDS_TABLE);
     }
 }

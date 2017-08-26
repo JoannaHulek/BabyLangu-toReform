@@ -10,4 +10,7 @@
     <string name="new_wording">New wording</string>
     <string name="kid_name">Kid name</string>
     <string name="date_of_birth">Date of birth</string>
+    <string name="add_new">Add new</string>
+    <string name="kid_saved">Kid saved</string>
+    <string name="kid_not_saved">Kid not saved</string>
 </resources>

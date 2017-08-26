@@ -9,6 +9,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.util.Log;
 
 import org.joda.time.LocalDate;
 
@@ -109,6 +110,15 @@ public class KidProvider extends ContentProvider {
         if (bg_colour == null) {
             throw new IllegalArgumentException("Illegal background colour");
         }
+        SQLiteDatabase database = mDbHelper.getWritableDatabase();
+//!!!TUTEJ DODAJESZ DO BAZY!!!
+        long id = database.insert(KidContract.KidEntry.TABLE_NAME, null, values);
+        if (id == -1) {
+            Log.e(LOG_TAG, "Failed to insert row for " + uri);
+            return null;
+        }
+
+        getContext().getContentResolver().notifyChange(uri, null);
         return ContentUris.withAppendedId(uri, id);
     }
 

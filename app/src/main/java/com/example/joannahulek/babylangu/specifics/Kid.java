@@ -12,6 +12,26 @@ import org.joda.time.LocalDate;
 
 public class Kid {
 
+    public Integer getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public LocalDate getBirth() {
+        return birth;
+    }
+
+    public String getImg_uri() {
+        return img_uri;
+    }
+
+    public String getBg_color() {
+        return bg_color;
+    }
+
     private final Integer id;
     private final String name;
     private final LocalDate birth;

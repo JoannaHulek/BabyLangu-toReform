@@ -18,18 +18,18 @@ import com.example.joannahulek.babylangu.data.KidContract;
 public class MainCaseActivity extends AppCompatActivity
         implements LoaderManager.LoaderCallbacks<Cursor> {
 
-    private KidCursorAdapter adapter;
+    private KidCursorAdapter kidCursorAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_case);
 
-        adapter = new KidCursorAdapter(this, null);
+        kidCursorAdapter = new KidCursorAdapter(this, null);
 
         ListView kidsListView = (ListView) findViewById(R.id.kids_list_view);
         kidsListView.setEmptyView(findViewById(R.id.empty_view));
-        kidsListView.setAdapter(adapter);
+        kidsListView.setAdapter(kidCursorAdapter);
         getSupportLoaderManager().initLoader(0, null, this);
 
         FloatingActionButton addFab = (FloatingActionButton) findViewById(R.id.add_fab);
@@ -46,7 +46,7 @@ public class MainCaseActivity extends AppCompatActivity
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
         String[] projection = {
                 KidContract.KidEntry._ID,
-                KidContract.KidEntry.TABLE_NAME,
+                KidContract.KidEntry.COLUMN_NAME,
                 KidContract.KidEntry.COLUMN_BIRTH,
                 KidContract.KidEntry.COLUMN_IMG_URI,
                 KidContract.KidEntry.COLUMN_BG_COLOR};
@@ -56,11 +56,11 @@ public class MainCaseActivity extends AppCompatActivity
 
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
-
+        kidCursorAdapter.swapCursor(data);
     }
 
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
-
+        kidCursorAdapter.swapCursor(null);
     }
 }
