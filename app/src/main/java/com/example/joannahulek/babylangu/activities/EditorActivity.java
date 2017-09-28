@@ -1,5 +1,6 @@
 package com.example.joannahulek.babylangu.activities;
 
+import android.app.DialogFragment;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
@@ -11,6 +12,7 @@ import android.widget.Toast;
 
 import com.example.joannahulek.babylangu.R;
 import com.example.joannahulek.babylangu.data.KidContract;
+import com.example.joannahulek.babylangu.fragments.DatePickerFragment;
 import com.example.joannahulek.babylangu.specifics.Kid;
 
 import org.joda.time.LocalDate;
@@ -32,6 +34,15 @@ public class EditorActivity extends AppCompatActivity {
 
         final EditText nameInput = (EditText) findViewById(R.id.name_input);
         final EditText birthInput = (EditText) findViewById(R.id.birth_input);
+
+        birthInput.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DialogFragment newFragment = new DatePickerFragment();
+                newFragment.show(getFragmentManager(), "DatePicker");
+            }
+        });
+
 
         findViewById(R.id.add_fab).setOnClickListener(new View.OnClickListener() {
             @Override
