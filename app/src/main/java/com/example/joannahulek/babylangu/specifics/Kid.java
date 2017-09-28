@@ -5,6 +5,7 @@ import android.content.ContentValues;
 import com.example.joannahulek.babylangu.data.KidContract;
 
 import org.joda.time.LocalDate;
+import org.joda.time.Years;
 
 /**
  * Created by Joasia on 19.08.2017.
@@ -24,6 +25,10 @@ public class Kid {
         return birth;
     }
 
+    public int getAge() {
+        return calculateKidAge();
+    }
+
     public String getImg_uri() {
         return img_uri;
     }
@@ -35,7 +40,7 @@ public class Kid {
     private final Integer id;
     private final String name;
     private final LocalDate birth;
-    private final String img_uri;
+   private final String img_uri;
     private final String bg_color;
 
     public Kid(Integer id, String name, LocalDate birth, String img_uri, String bg_color) {
@@ -53,5 +58,9 @@ public class Kid {
         values.put(KidContract.KidEntry.COLUMN_IMG_URI, img_uri);
         values.put(KidContract.KidEntry.COLUMN_BG_COLOR, bg_color);
         return values;
+    }
+
+    private int calculateKidAge (){
+        return Years.yearsBetween(birth, LocalDate.now()).getYears();
     }
 }

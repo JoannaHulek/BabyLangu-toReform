@@ -2,7 +2,6 @@ package com.example.joannahulek.babylangu.activities;
 
 import android.content.Intent;
 import android.net.Uri;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,8 +14,7 @@ import com.example.joannahulek.babylangu.data.KidContract;
 import com.example.joannahulek.babylangu.specifics.Kid;
 
 import org.joda.time.LocalDate;
-
-import static android.icu.lang.UCharacter.GraphemeClusterBreak.L;
+import org.joda.time.format.ISODateTimeFormat;
 
 public class EditorActivity extends AppCompatActivity {
 
@@ -49,13 +47,16 @@ public class EditorActivity extends AppCompatActivity {
         Uri kidUri = null;
         try {
             String name = nameInput.getText().toString();
-            LocalDate birth = new LocalDate();
+            LocalDate birth = LocalDate.parse(birthInput.getText().toString());
             String img_uri = "NOT NULL";
             String bg_color = "NOT NULL";
             kid = new Kid(null, name, birth, img_uri, bg_color);
             kidUri = getContentResolver().insert(KidContract.KidEntry.CONTENT_URI, kid.transformToContentValues());
+            Toast.makeText(EditorActivity.this, getString(R.string.kid_saved), Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(EditorActivity.this, MainCaseActivity.class);
+            startActivity(intent);
         } catch (Exception e) {
-            Log.e("EDITORSACTIVITY","jakis exception",e);
+            Log.e("EDITORSACTIVITY", "jakis exception", e);
             Toast.makeText(EditorActivity.this, getString(R.string.kid_not_saved), Toast.LENGTH_SHORT).show();
         }
     }

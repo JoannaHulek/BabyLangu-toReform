@@ -27,7 +27,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:contentDescription="@string/empty_list"
-            android:src="@drawable/empty" />
+            />
 
         <TextView
             android:id="@+id/empty_label"

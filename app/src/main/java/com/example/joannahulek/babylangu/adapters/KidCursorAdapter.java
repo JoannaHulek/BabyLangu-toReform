@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CursorAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.joannahulek.babylangu.R;
@@ -45,7 +44,7 @@ public class KidCursorAdapter extends CursorAdapter implements Serializable{
         final Kid kid = getKidFromCursor(cursor);
 
         itemMainText.setText(kid.getName());
-        itemDescriptionText.setText(kid.getBirth().toString());
+        itemDescriptionText.setText(Integer.toString(kid.getAge()));
     }
 
     private Kid getKidFromCursor (final Cursor cursor){
@@ -56,4 +55,5 @@ public class KidCursorAdapter extends CursorAdapter implements Serializable{
 
         return new Kid(id, name, birth, img_uri, bg_color);
     }
+
 }
